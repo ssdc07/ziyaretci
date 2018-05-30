@@ -2,16 +2,9 @@
 
 Ziyaretci modülünü eklemek için öncelikle,
 
-Komut satırında modülümüzü ekleyeceğimiz yere (@vendor/kouosl/) altına geliyoruz. Ardından "https://github.com/ssdc07/ziyaretci.git" komutunu çalıştırarak modülümüzü projemize indiriyoruz.
-
-Portal dizinindeki "\frontend\config\main.php" dosyasına girerek şu satırları ekliyoruz;
-
-'ziyaretci' => [ 'class' => 'kouosl\ziyaretci\Module'
-],
-
 Portal klasörünün içerisindeki composer.json dosyasında gerekli yerlere şu satırları ekliyoruz;
 
-############################
+-------------------------
 
 "repositories": [ { .... { "type": "vcs", "url": "https://github.com/ssdc07/ziyaretci.git" } ],
 
@@ -21,17 +14,27 @@ Portal klasörünün içerisindeki composer.json dosyasında gerekli yerlere şu
 "kouosl/ziyaretci": "dev-master"
 },
 
-############################
+-------------------------
 
 Ekledikten sonra sanal makinaya bağlanarak şu komutları çalıştırıyoruz;
 
-cd /var/www/portal sudo chmod -R 777 vendor/kouosl/ziyaretci composer update
+cd /var/www/portal 
+composer update
+php yii migrate--migrationPath=@vendor/kouosl/ziyaretci/migrations
 
-Son adım olarakda modülümüzde "migrations" klasöründeki .php uzantılı dosyayı kopyalayıyoruz ve portal dizininde "console/migrations/" altına yapıştırıyoruz(klasör yok ise kendimiz oluşturuyoruz). Ardından sanal makinamızda,
+Böylelikle modülümüzü projeye dahil ediyoruz ve veritabanımızı oluşturup örnek bir kayıt ekliyoruz.
 
-php yii migrate
+-------------------------
 
-Komutunu çalıştırıyoruz böylelikle veritabanımızı oluşturup örnek bir kayıt ekliyoruz.
+Son adım olarakda;
+
+Portal dizinindeki "\frontend\config\main.php" dosyasına girerek şu satırları ekliyoruz;
+
+'ziyaretci' => [ 'class' => 'kouosl\ziyaretci\Module'
+],
+
+-------------------------
+
 
 Modül kurulumu tamamlanmıştır.
 
